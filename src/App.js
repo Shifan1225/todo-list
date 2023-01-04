@@ -1,5 +1,6 @@
 import './App.css';
 import {useState} from 'react';
+import Todo from './Todo';
 
 
 function App() {
@@ -48,16 +49,8 @@ function App() {
       </div>
       <ul>
         {todos.map((todo, i) => {
-          return ( 
-            <li>
-              <input 
-                type="checkbox"
-                onClick={(e) => toggleDone(e, i)}
-                checked={todo.done ? 'checked' : ''}
-              ></input>
-              {todo.name}
-            </li>
-          );
+          return 
+          <Todo todo={todo} onClick={(e) => toggleDone(e, i)}></Todo>
         })}
       </ul>
     </div>
