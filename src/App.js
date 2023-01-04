@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from 'react';
-import Todo from './Todo';
+import Todos from './Todos';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     console.log({todo});
   }
 
-  const toggleDone = (e, index) => {
+  const toggleDone = (index) => {
     const newTodos = todos.map((todo, i) => {
       if (i !== index) {
         return todo;
@@ -35,24 +35,19 @@ function App() {
     setTodos(newTodos);
   }
 
-  const TotalRemaining = todos.filter((todo) => {
+  const totalRemaining = todos.filter((todo) => {
     return todo.done === false;
   }).length;
 
   return (
     <div className="App">
       <h1>My Todo List</h1>
-      <div>TotalRemaining: {TotalRemaining}</div>
+      <div>TotalRemaining: {totalRemaining}</div>
       <div>
         <input type="text" onChange={handleChange} value={todo} />
         <button onClick={handleClick}>Add</button>
       </div>
-      <ul>
-        {todos.map((todo, i) => {
-          return 
-          <Todo todo={todo} onClick={(e) => toggleDone(e, i)}></Todo>
-        })}
-      </ul>
+      <Todos todos={todos} onToggleDone={(i) => toggleDone(i)}></Todos>
     </div>
   );
 }
