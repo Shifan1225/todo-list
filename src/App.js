@@ -1,6 +1,7 @@
 import './App.css';
 import {useState} from 'react';
 import Todos from './Todos';
+import NewTodo from './NewTodo';
 
 
 function App() {
@@ -10,19 +11,14 @@ function App() {
     { name: 'Make a video', done: false },
     { name: 'Reply a comment', done: true },
   ]);
-  const [todo, setTodo] = useState('');
-  const handleClick = () => {
+
+  const handleNewTodo = (todo) => {
     if (!todo) {
       return;
     }
     const newTodos = todos.concat([{ name: todo, done: false }]);
     setTodos(newTodos);
-    setTodo('');
-  }
-  const handleChange = (e) => {
-    const todo = e.target.value;
-    setTodo(todo);
-    console.log({todo});
+
   }
 
   const toggleDone = (index) => {
@@ -43,10 +39,8 @@ function App() {
     <div className="App">
       <h1>My Todo List</h1>
       <div>TotalRemaining: {totalRemaining}</div>
-      <div>
-        <input type="text" onChange={handleChange} value={todo} />
-        <button onClick={handleClick}>Add</button>
-      </div>
+      <NewTodo onNewTodo={(todo) => handleNewTodo(todo)} />
+
       <Todos todos={todos} onToggleDone={(i) => toggleDone(i)}></Todos>
     </div>
   );
